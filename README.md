@@ -7,4 +7,5 @@ Este espaço será constantemente atualizado com conteúdos técnicos, exemplos 
 [Curso em andamento](https://www.udemy.com/course/devops-automacao-sem-enrolacao/)\
 Materiais do curso:
  - [devops_automation](https://github.com/iesodias/devops_automation)
+ - [devops_automation (fork)](https://github.com/lucassdraft/devops_automation)
  - [devops_labs](https://github.com/iesodias/devops_labs)
