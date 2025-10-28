@@ -9,3 +9,5 @@ Materiais do curso:
  - [devops_automation](https://github.com/iesodias/devops_automation)
  - [devops_automation (fork)](https://github.com/lucassdraft/devops_automation)
  - [devops_labs](https://github.com/iesodias/devops_labs)
+
+<img width="1092" height="1708" alt="image" src="https://github.com/user-attachments/assets/4130ecfd-c20e-40f6-874e-c2467f0aff38" />
