@@ -4,6 +4,11 @@ Repositório dedicado à organização e compartilhamento de conceitos, prática
 Este espaço será constantemente atualizado com conteúdos técnicos, exemplos práticos e links úteis, facilitando o aprendizado e a aplicação de DevOps no dia a dia.
 
 ---
+
+## TO DO
+ - Fazer a aula de VPC. (Aula 12).
+
+---
 [Curso em andamento](https://www.udemy.com/course/devops-automacao-sem-enrolacao/)\
 Materiais do curso:
  - [devops_automation](https://github.com/iesodias/devops_automation)
