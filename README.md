@@ -16,7 +16,7 @@ Materiais do curso:
  - [devops_labs](https://github.com/iesodias/devops_labs)
 ---
 EC2
- - [Primeira maquina](EC2/01-Primeira_Maquina.md)
+ - [Primeira maquina](AWS/EC2/01-Primeira_Maquina.md)
 ---
 Controlam quais portas são liberadas e quem pode acessar seus recursos
 VPC (AWS)
