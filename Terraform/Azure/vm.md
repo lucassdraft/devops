@@ -310,5 +310,3 @@ Você agora tem um template completo do Terraform para Azure, com:
 ✔ Network Interface  
 ✔ NSG com portas 22 e 8081  
 ✔ VM Linux
-
-Se quiser, posso montar isso em um repositório organizado, adicionar módulos, ou deixar tudo parametrizável. Quer evoluir esse template?
