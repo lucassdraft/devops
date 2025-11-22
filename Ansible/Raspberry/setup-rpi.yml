@@ -1,0 +1,105 @@
+- name: Configurar Samba no Raspberry Pi
+  hosts: raspberry
+  become: yes
+
+  vars_prompt:
+    - name: smb_password
+      prompt: "Digite a senha SMB para o usuário 'wictor'"
+      private: yes
+
+  tasks:
+
+    - name: Instalar o Samba
+      apt:
+        name: samba
+        state: present
+        update_cache: yes
+
+    - name: Garantir que serviços Samba estão habilitados e iniciados
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - smbd
+        - nmbd
+
+    - name: Backup do smb.conf original (se ainda não existir)
+      copy:
+        src: /etc/samba/smb.conf
+        dest: /etc/samba/smb.conf.bkp
+        remote_src: yes
+        force: no
+
+    # ---------------------------------------------------
+    #    PERMISSÕES DOS DIRETÓRIOS (adicionadas)
+    # ---------------------------------------------------
+
+    - name: Ajustar permissões da pasta /home/wictor
+      file:
+        path: /home/wictor
+        owner: wictor
+        group: wictor
+        mode: '0775'
+        recurse: yes
+
+    - name: Ajustar permissões da pasta /var/www/html
+      file:
+        path: /var/www/html
+        owner: wictor
+        group: wictor
+        mode: '0775'
+        recurse: yes
+
+    # ---------------------------------------------------
+    #    CONFIGURAÇÃO DO SMB
+    # ---------------------------------------------------
+
+    - name: Configuração do compartilhamento /home/wictor
+      blockinfile:
+        path: /etc/samba/smb.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK HOME"
+        block: |
+          [home-wictor]
+          path = /home/wictor
+          browseable = yes
+          writable = yes
+          read only = no
+          force user = wictor
+          valid users = wictor
+          create mask = 0664
+          directory mask = 0775
+
+    - name: Configuração do compartilhamento /var/www/html
+      blockinfile:
+        path: /etc/samba/smb.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK WWW"
+        block: |
+          [www]
+          path = /var/www/html
+          browseable = yes
+          writable = yes
+          read only = no
+          force user = wictor
+          valid users = wictor
+          create mask = 0664
+          directory mask = 0775
+
+    - name: Reiniciar serviços Samba
+      service:
+        name: smbd
+        state: restarted
+
+    # ---------------------------------------------------
+    #        CRIAR USUÁRIO SAMBA
+    # ---------------------------------------------------
+
+    - name: Verificar se o usuário Samba já existe
+      command: "pdbedit -L"
+      register: samba_users
+      changed_when: false
+
+    - name: Criar usuário Samba com senha
+      shell: |
+        printf "%s\n%s\n" "{{ smb_password }}" "{{ smb_password }}" | smbpasswd -a wictor
+      when: "'wictor:' not in samba_users.stdout"
