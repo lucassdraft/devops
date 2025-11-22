@@ -242,7 +242,3 @@ O backend é uma peça fundamental no Terraform, responsável por garantir:
 *   proteção contra corrupção
 
 O arquivo `backend.tf` permite declarar onde esse state será armazenado, e o comando `terraform init` cuida de inicializar e validar essa configuração.
-
-* * *
-
-Se quiser, posso gerar essa documentação em formato **markdown para download**, ou criar uma **versão resumida**, ou até uma **versão para treinamento interno**.
